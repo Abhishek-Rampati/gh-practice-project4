@@ -1,0 +1,57 @@
+name: Practice Project Workflow
+on: push
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        - name: Set up nodejs
+          uses: actions/setup-node@v3
+          with:
+            node-version: '16.x'
+        - name: Install dependencies
+          run: |
+            npm ci
+        - name: echo "Running linting..."
+          run : echo "Running linting..."
+        - name: Run linting
+          run: |
+            npm run lint
+    test:
+        runs-on: ubuntu-latest
+        needs: lint
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        - name: Set up nodejs
+          uses: actions/setup-node@v3
+          with:
+            node-version: '16.x'
+        - name: Install dependencies
+          run: |
+            npm ci
+        - name: echo "Linting passed, proceeding to tests..."
+          run : echo "Running tests..."
+        - name: Run tests
+          run: |
+            npm run test
+    build:
+        runs-on: ubuntu-latest
+        needs: [lint, test]
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        - name: Set up nodejs
+          uses: actions/setup-node@v3
+          with:
+            node-version: '16.x'
+        - name: Install dependencies
+          run: |
+            npm ci
+        - name: echo "Linting and tests passed, proceeding to build..."
+          run : echo "Running build..."
+        - name: Build project
+          run: |
+            npm run build
+    
