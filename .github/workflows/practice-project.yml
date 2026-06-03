@@ -12,7 +12,7 @@ jobs:
             node-version: '16.x'
         - name: Install dependencies
           run: |
-            npm ci
+            npm clean-install
         - name: echo "Running linting..."
           run : echo "Running linting..."
         - name: Run linting
@@ -30,7 +30,7 @@ jobs:
             node-version: '16.x'
         - name: Install dependencies
           run: |
-            npm ci
+            npm clean-install
         - name: echo "Linting passed, proceeding to tests..."
           run : echo "Running tests..."
         - name: Run tests
@@ -48,7 +48,7 @@ jobs:
             node-version: '16.x'
         - name: Install dependencies
           run: |
-            npm ci
+            npm clean-install
         - name: echo "Linting and tests passed, proceeding to build..."
           run : echo "Running build..."
         - name: Build project
